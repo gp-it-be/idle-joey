@@ -14,7 +14,7 @@
     <packaging>jar</packaging>
     <name>idle-textclient</name>
 
-    
+
 
     <dependencies>
         <dependency>
