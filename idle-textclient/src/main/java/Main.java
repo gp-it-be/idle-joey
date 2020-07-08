@@ -1,4 +1,3 @@
-import commands.Command;
 import executor.CommandProvider;
 import input.CommandBuilder;
 import input.ConsoleCommandProvider;

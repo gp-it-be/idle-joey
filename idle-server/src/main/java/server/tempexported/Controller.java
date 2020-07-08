@@ -1,7 +1,7 @@
 package server.tempexported;
 
-import server.exported.CreateUserRequest;
 import server.exported.CreateUserResponse;
+import server.exported.CreateUserRequest;
 
 public class Controller {
 

@@ -5,20 +5,32 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.joey</groupId>
     <artifactId>idle-joey</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>idle-server</module>
+        <module>idle-textclient</module>
+    </modules>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
         <maven.compiler.release>11</maven.compiler.release>
     </properties>
 
     <build>
         <finalName>idle-server</finalName>
+
         <plugins>
             <plugin>
-                <!-- Build an executable JAR -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <release>11</release>
+                </configuration>
+            </plugin>
+            <!--
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.1.2</version>
@@ -27,11 +39,12 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>server.tempexported.ServerApplication</mainClass>
+                            <mainClass>ServerApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
             </plugin>
+                -->
         </plugins>
     </build>
 
