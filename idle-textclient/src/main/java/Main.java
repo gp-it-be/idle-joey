@@ -2,7 +2,7 @@ import executor.CommandProvider;
 import input.CommandBuilder;
 import input.ConsoleCommandProvider;
 import input.WrappedWriter;
-import server.tempexported.ServerApplication;
+import server.user.tempexported.ServerApplication;
 
 import java.io.BufferedWriter;
 import java.io.PrintWriter;

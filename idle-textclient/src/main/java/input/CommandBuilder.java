@@ -1,7 +1,7 @@
 package input;
 
 import commands.Command;
-import server.tempexported.Controller;
+import server.user.tempexported.Controller;
 
 import java.util.Optional;
 

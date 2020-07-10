@@ -1,9 +1,9 @@
 package input;
 
 import commands.Command;
-import server.exported.CreateUserRequest;
-import server.exported.CreateUserResponse;
-import server.tempexported.Controller;
+import server.user.exported.CreateUserRequest;
+import server.user.exported.CreateUserResponse;
+import server.user.tempexported.Controller;
 
 public class CreateUserCommand implements Command {
     private Controller controller;

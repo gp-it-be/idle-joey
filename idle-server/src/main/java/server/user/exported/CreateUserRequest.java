@@ -1,4 +1,4 @@
-package server.exported;
+package server.user.exported;
 
 public class CreateUserRequest {
     private String username;
