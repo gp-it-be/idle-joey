@@ -1,24 +1,28 @@
 package input;
 
 import commands.Command;
-import server.user.exported.LoginRequest;
-import server.user.exported.LoginResponse;
-import server.user.tempexported.Controller;
+import requestresponses.LoginRequest;
+import requestresponses.LoginResponse;
+import server.tempexported.Client;
+import state.TokenHolder;
 
 public class LoginUserCommand implements Command {
-    private Controller controller;
+    private Client client;
     private final String username;
     private final String password;
 
-    LoginUserCommand(Controller controller, String username, String password) {
-        this.controller = controller;
+    LoginUserCommand(Client client, String username, String password) {
+        this.client = client;
         this.username = username;
         this.password = password;
     }
 
     @Override
     public void execute(WrappedWriter output) {
-        LoginResponse response = controller.loginUser(new LoginRequest(username, password));
+        LoginResponse response = client.loginUser(new LoginRequest(username, password));
+        if(response.success()){
+            TokenHolder.token = response.getToken();
+        }
         output.write(response.toString());
 
     }

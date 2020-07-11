@@ -1,26 +1,26 @@
 package input;
 
 import commands.Command;
-import server.user.tempexported.Controller;
+import server.tempexported.Client;
 
 import java.util.Arrays;
 import java.util.Optional;
 
 public class CommandBuilder {
 
-    private static Controller controller;
+    private static Client client;
 
 
-    public static void setController(Controller controller) {
-        if(controller == null){
-            throw new RuntimeException("Provide a non null controller");
+    public static void setClient(Client client) {
+        if(client == null){
+            throw new RuntimeException("Provide a non null client");
         }
-        CommandBuilder.controller = controller;
+        CommandBuilder.client = client;
     }
 
     public static Optional<Command> buildCommand(String input) {
-        if(controller == null){
-            throw new RuntimeException("Provide the controller before building commands");
+        if(client == null){
+            throw new RuntimeException("Provide the client before building commands");
         }
 
         String[] splat = input.split(" ");
@@ -29,12 +29,17 @@ public class CommandBuilder {
 
         if(commandName.equals("create")){
             verifyParamLength(parameters, 2);
-            return Optional.of(new CreateUserCommand(controller, parameters[0], parameters[1]));
+            return Optional.of(new CreateUserCommand(client, parameters[0], parameters[1]));
         }
 
         if(commandName.equals("login")){
             verifyParamLength(parameters, 2);
-            return Optional.of(new LoginUserCommand(controller, parameters[0], parameters[1]));
+            return Optional.of(new LoginUserCommand(client, parameters[0], parameters[1]));
+        }
+
+        if(commandName.equals("start")){
+            verifyParamLength(parameters, 1);
+            return Optional.of(new StartActivityCommand(client, parameters[0]));
         }
 
 

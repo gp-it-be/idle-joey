@@ -9,10 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>idle-server</artifactId>
+    <artifactId>idle-server-activity</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
-    <name>idle-server</name>
+    <name>idle-server-activity</name>
 
 
     <dependencies>
@@ -23,15 +23,6 @@
             <version>3.3.3</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.joey</groupId>
-            <artifactId>idle-server-user</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.joey</groupId>
-            <artifactId>idle-server-activity</artifactId>
-            <version>1.0</version>
-        </dependency>
+
     </dependencies>
 </project>

@@ -10,7 +10,10 @@
 
     <modules>
         <module>idle-server</module>
+        <module>idle-server-activity</module>
+        <module>idle-server-user</module>
         <module>idle-textclient</module>
+
     </modules>
 
     <properties>

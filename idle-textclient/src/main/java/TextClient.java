@@ -14,13 +14,18 @@ public class TextClient {
         ServerApplication.main(null);
 
 
-        CommandBuilder.setController(ServerApplication.getController());
+        CommandBuilder.setClient(ServerApplication.getClient());
 
         WrappedWriter consoleOutputWriter = new WrappedWriter(new BufferedWriter(new PrintWriter(System.out)));
         CommandProvider commandProvider= new ConsoleCommandProvider(new Scanner(System.in),
                 consoleOutputWriter);
         while(true){
-            commandProvider.nextCommand().execute(consoleOutputWriter);
+            try {
+                commandProvider.nextCommand().execute(consoleOutputWriter);
+            }catch (Exception e){
+                e.printStackTrace();
+                System.out.println("Command failed: " + e.getMessage());
+            }
         }
 
     }

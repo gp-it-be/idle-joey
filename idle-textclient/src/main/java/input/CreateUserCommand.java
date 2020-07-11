@@ -1,24 +1,24 @@
 package input;
 
 import commands.Command;
-import server.user.exported.CreateUserRequest;
-import server.user.exported.CreateUserResponse;
-import server.user.tempexported.Controller;
+import requestresponses.CreateUserRequest;
+import requestresponses.CreateUserResponse;
+import server.tempexported.Client;
 
 public class CreateUserCommand implements Command {
-    private Controller controller;
+    private Client client;
     private final String username;
     private final String password;
 
-    CreateUserCommand(Controller controller, String username, String password) {
-        this.controller = controller;
+    CreateUserCommand(Client client, String username, String password) {
+        this.client = client;
         this.username = username;
         this.password = password;
     }
 
     @Override
     public void execute(WrappedWriter output) {
-        CreateUserResponse response = controller.createUser(new CreateUserRequest(username, password));
+        CreateUserResponse response = client.createUser(new CreateUserRequest(username, password));
         output.write(response.toString());
 
     }
