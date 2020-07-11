@@ -31,7 +31,7 @@ public class LoginResponse {
 
     public String getToken() {
         if (!success) {
-            throw new RuntimeException("There is no token in an unsuccesful login response");
+            throw new RuntimeException("There is no token in an unsuccessful login response");
         }
         return token;
     }
