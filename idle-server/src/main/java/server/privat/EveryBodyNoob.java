@@ -1,9 +1,9 @@
 package server.privat;
 
-import activity.exported.InventoryInfo;
-import activity.exported.PlayerInfo;
-import activity.exported.PlayerInfoProvider;
-import activity.exported.StatsInfo;
+import requirement.exported.InventoryInfo;
+import requirement.exported.PlayerInfo;
+import requirement.exported.PlayerInfoProvider;
+import requirement.exported.StatsInfo;
 import ids.ItemId;
 import ids.SkillId;
 

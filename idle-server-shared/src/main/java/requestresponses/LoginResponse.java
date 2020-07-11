@@ -20,6 +20,10 @@ public class LoginResponse {
         return new LoginResponse(true, token);
     }
 
+    public static LoginResponse incorrectPassword() {
+        return new LoginResponse(false, null);
+    }
+
 
     public boolean success() {
         return success;

@@ -23,6 +23,10 @@
             <version>3.3.3</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.joey</groupId>
+            <artifactId>idle-server-shared</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 </project>

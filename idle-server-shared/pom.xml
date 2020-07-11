@@ -9,10 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>idle-server-activity</artifactId>
+    <artifactId>idle-server-shared</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
-    <name>idle-server-activity</name>
+    <name>idle-server-shared</name>
 
 
     <dependencies>
@@ -23,6 +23,5 @@
             <version>3.3.3</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 </project>

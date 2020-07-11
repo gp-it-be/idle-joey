@@ -1,9 +1,9 @@
 package server.tempexported;
 
 
-import activity.exported.ActivityController;
-import activity.exported.ActivityService;
-import activity.exported.PlayerInfoProvider;
+import requirement.exported.ActivityController;
+import requirement.exported.ActivityService;
+import requirement.exported.PlayerInfoProvider;
 import server.privat.EveryBodyNoob;
 import server.privat.InMemorySessionManager;
 import server.privat.InMemoryUserRepo;

@@ -10,7 +10,8 @@
 
     <modules>
         <module>idle-server</module>
-        <module>idle-server-activity</module>
+        <module>idle-server-shared</module>
+        <module>idle-server-requirement</module>
         <module>idle-server-user</module>
         <module>idle-textclient</module>
 

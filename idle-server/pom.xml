@@ -30,7 +30,7 @@
         </dependency>
         <dependency>
             <groupId>com.joey</groupId>
-            <artifactId>idle-server-activity</artifactId>
+            <artifactId>idle-server-requirement</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>

@@ -31,9 +31,12 @@ public class UserService {
         return userRepo.findBy(request.getUsername())
                 .map(foundUser -> foundUser.matchesPassword(request.getPassword()))
                 .map(success -> {
+                    if(success){
                     String token = generateToken();
                     sessionManager.sessionStarted(token, request.getUsername());
-                    return LoginResponse.success(token);
+                    return LoginResponse.success(token);}else{
+                        return LoginResponse.incorrectPassword();
+                    }
                 })
                 .orElseGet(LoginResponse::userDoesntExist);
     }
