@@ -3,7 +3,7 @@ package input;
 import commands.Command;
 import executor.CommandProvider;
 
-import java.io.Writer;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class ConsoleCommandProvider implements CommandProvider {
@@ -20,7 +20,14 @@ public class ConsoleCommandProvider implements CommandProvider {
     @Override
     public Command nextCommand() {
         String input = scanner.nextLine();
-        return CommandBuilder.buildCommand(input).orElseGet(() ->
+        Optional<Command> command;
+        try {
+            command = CommandBuilder.buildCommand(input);
+        } catch (Exception e) {
+            output.write(e.getMessage());
+            return nextCommand();
+        }
+        return command.orElseGet(() ->
         {
             output.write("invalid command");
             return nextCommand();

@@ -21,7 +21,7 @@ public class InMemoryUserRepo implements UserRepo {
             throw new RuntimeException("User to be created should not already have an ID " + user.getId());
         }
 
-        User created = new User(nextId++, user.getName());
+        User created = new User(nextId++, user.getName(), user.getHashedPassword());
 
         users.add(created);
         return created;

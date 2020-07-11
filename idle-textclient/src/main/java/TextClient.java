@@ -2,13 +2,13 @@ import executor.CommandProvider;
 import input.CommandBuilder;
 import input.ConsoleCommandProvider;
 import input.WrappedWriter;
-import server.user.tempexported.ServerApplication;
+import server.tempexported.ServerApplication;
 
 import java.io.BufferedWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class Main {
+public class TextClient {
 
     public static void main(String[] args) {
         ServerApplication.main(null);

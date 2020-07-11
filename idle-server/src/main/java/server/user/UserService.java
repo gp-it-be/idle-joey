@@ -1,6 +1,8 @@
 package server.user;
 
 import server.user.exported.CreateUserRequest;
+import server.user.exported.LoginRequest;
+import server.user.exported.LoginResponse;
 
 import java.util.Optional;
 
@@ -16,8 +18,15 @@ public class UserService {
         if(userRepo.findBy(request.getUsername()).isPresent()){
             return Optional.empty();
         }else{
-            User user = userRepo.createUser(new User(request.getUsername()));
+            User user = userRepo.createUser(new User(request.getUsername(), PasswordHasher.hash(request.getPassWord())));
             return Optional.ofNullable(user);
         }
+    }
+
+    public LoginResponse loginUser(LoginRequest request) {
+        return userRepo.findBy(request.getUsername())
+                .map(foundUser -> foundUser.matchesPassword(request.getPassword()))
+                .map(LoginResponse::new)
+                .orElseGet(LoginResponse::userDoesntExist);
     }
 }

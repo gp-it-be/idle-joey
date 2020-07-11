@@ -1,7 +1,8 @@
-package server.user.tempexported;
+package server.tempexported;
 
 import server.user.InMemoryUserRepo;
 import server.user.UserService;
+import server.user.tempexported.Controller;
 
 public class ServerApplication {
 
