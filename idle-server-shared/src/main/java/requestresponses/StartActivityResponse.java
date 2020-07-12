@@ -23,7 +23,7 @@ public class StartActivityResponse {
     @Override
     public String toString() {
         return "StartActivityResponse{" +
-                "success=" + success +
+                "getSuccess=" + success +
                 ", reason='" + reason + '\'' +
                 ", startedActivity='" + startedActivity + '\'' +
                 '}';

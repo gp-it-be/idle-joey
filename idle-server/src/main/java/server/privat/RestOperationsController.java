@@ -1,8 +1,5 @@
 package server.privat;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import requestresponses.*;
 import requirement.exported.ActivityController;
 import user.exported.UserController;
@@ -39,4 +36,5 @@ public class RestOperationsController {
     public StartActivityResponse startActivity(@RequestHeader("token") String token, @RequestBody StartActivityRequest request){
         return activityController.startActivity(token, request);
     }
+
 }

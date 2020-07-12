@@ -3,7 +3,9 @@ package client;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
+import reactor.core.publisher.Flux;
 import requestresponses.*;
+import org.springframework.http.codec.ServerSentEvent;
 
 public interface Client {
 
@@ -20,4 +22,9 @@ public interface Client {
     @RequestLine("POST /login")
     @Headers({"token: {token}","Content-Type: application/json"})
     StartActivityResponse startActivity(StartActivityRequest request, @Param("token") String token);
+
+
+    @RequestLine("GET /subscribetoevents")
+    @Headers({"token: {token}","Content-Type: application/json"})
+    Flux<ServerSentEvent> subscribeToEvents(@Param("token") String token);
 }

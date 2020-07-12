@@ -34,7 +34,7 @@ public class UserService {
                     if(success){
                     String token = generateToken();
                     sessionManager.sessionStarted(token, request.getUsername());
-                    return LoginResponse.success(token);}else{
+                    return LoginResponse.getSuccess(token);}else{
                         return LoginResponse.incorrectPassword();
                     }
                 })

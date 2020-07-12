@@ -21,7 +21,6 @@ public class UserController {
                 .orElseGet(CreateUserResponse::notCreated);
     }
 
-
     public LoginResponse loginUser(LoginRequest request) {
         return userService.loginUser(request);
     }

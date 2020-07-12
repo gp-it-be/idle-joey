@@ -7,4 +7,8 @@ module idle.server {
     requires spring.web;
     requires spring.boot.autoconfigure;
     requires spring.context;
+    requires spring.webflux;
+    requires reactor.core;
+    requires spring.core;
+    requires spring.aop;
 }

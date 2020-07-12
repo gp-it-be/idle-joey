@@ -5,7 +5,6 @@ import org.junit.Test;
 import requestresponses.CreateUserRequest;
 import requestresponses.LoginRequest;
 import requestresponses.LoginResponse;
-import user.exported.SessionManager;
 import user.exported.User;
 import user.exported.UserRepo;
 import user.exported.UserService;
@@ -61,7 +60,7 @@ public class UserServiceTest {
 
         LoginResponse loginResponse = userService.loginUser(new LoginRequest(requestedName, requestedPassword));
 
-        assertTrue(loginResponse.success());
+        assertTrue(loginResponse.getSuccess());
 
 
     }
@@ -77,14 +76,14 @@ public class UserServiceTest {
 
         LoginResponse loginResponse = userService.loginUser(new LoginRequest(requestedName, "wrongpassword"));
 
-        assertFalse(loginResponse.success());
+        assertFalse(loginResponse.getSuccess());
     }
 
 
     @Test
     public void loginNotExistingUser(){
         LoginResponse loginResponse = userService.loginUser(new LoginRequest("cowkilled37", "franky"));
-        assertFalse(loginResponse.success());
+        assertFalse(loginResponse.getSuccess());
     }
 
 }

@@ -7,6 +7,9 @@ public class LoginResponse {
     private String token;
 
 
+    public LoginResponse() {
+    }
+
     private LoginResponse(boolean success, String token) {
         this.success = success;
         this.token = token;
@@ -16,7 +19,7 @@ public class LoginResponse {
         return new LoginResponse(false, null);
     }
 
-    public static LoginResponse success(String token) {
+    public static LoginResponse getSuccess(String token) {
         return new LoginResponse(true, token);
     }
 
@@ -25,8 +28,17 @@ public class LoginResponse {
     }
 
 
-    public boolean success() {
+    public boolean getSuccess() {
         return success;
+    }
+
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getToken() {
@@ -39,7 +51,7 @@ public class LoginResponse {
     @Override
     public String toString() {
         return "LoginResponse{" +
-                "success=" + success +
+                "getSuccess=" + success +
                 ", token='" + token + '\'' +
                 '}';
     }
