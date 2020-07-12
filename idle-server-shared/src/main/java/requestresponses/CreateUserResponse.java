@@ -32,4 +32,17 @@ public class CreateUserResponse {
                 ", someUniqueId='" + someUniqueId + '\'' +
                 '}';
     }
+
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getSomeUniqueId() {
+        return someUniqueId;
+    }
 }

@@ -28,4 +28,21 @@ public class StartActivityResponse {
                 ", startedActivity='" + startedActivity + '\'' +
                 '}';
     }
+
+
+    public StartActivityResponse() {
+    }
+
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public String getStartedActivity() {
+        return startedActivity;
+    }
 }

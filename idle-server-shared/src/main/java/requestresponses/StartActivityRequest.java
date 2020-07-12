@@ -12,4 +12,12 @@ public class StartActivityRequest {
     public String getActivityName() {
         return activityName;
     }
+
+
+    public StartActivityRequest() {
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
 }
