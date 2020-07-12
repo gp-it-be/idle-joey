@@ -17,6 +17,7 @@
     <artifactId>idle-server</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
+    <groupId>com.joey</groupId>
     <name>idle-server</name>
 
 

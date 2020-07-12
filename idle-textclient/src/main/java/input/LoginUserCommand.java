@@ -3,7 +3,7 @@ package input;
 import commands.Command;
 import requestresponses.LoginRequest;
 import requestresponses.LoginResponse;
-import server.tempexported.Client;
+import client.Client;
 import state.TokenHolder;
 
 public class LoginUserCommand implements Command {
@@ -19,7 +19,7 @@ public class LoginUserCommand implements Command {
 
     @Override
     public void execute(WrappedWriter output) {
-        LoginResponse response = client.loginUser(new LoginRequest(username, password));
+        LoginResponse response = client.login(new LoginRequest(username, password));
         if(response.success()){
             TokenHolder.token = response.getToken();
         }

@@ -28,10 +28,30 @@
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
+            <groupId>com.joey</groupId>
             <artifactId>idle-server</artifactId>
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>
+
+
+
+        <!-- https://mvnrepository.com/artifact/io.github.openfeign/feign-core -->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-core</artifactId>
+            <version>11.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.github.openfeign/feign-gson -->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-gson</artifactId>
+            <version>11.0</version>
+        </dependency>
+
+
     </dependencies>
+
+
+
 </project>

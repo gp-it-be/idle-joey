@@ -3,7 +3,7 @@ package input;
 import commands.Command;
 import requestresponses.CreateUserRequest;
 import requestresponses.CreateUserResponse;
-import server.tempexported.Client;
+import client.Client;
 
 public class CreateUserCommand implements Command {
     private Client client;

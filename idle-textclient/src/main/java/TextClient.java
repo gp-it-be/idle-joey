@@ -1,8 +1,10 @@
+import client.Client;
 import executor.CommandProvider;
+import feign.Feign;
+import feign.gson.GsonDecoder;
 import input.CommandBuilder;
 import input.ConsoleCommandProvider;
 import input.WrappedWriter;
-import server.tempexported.ServerApplication;
 
 import java.io.BufferedWriter;
 import java.io.PrintWriter;
@@ -11,10 +13,10 @@ import java.util.Scanner;
 public class TextClient {
 
     public static void main(String[] args) {
-        ServerApplication.main(null);
+        //ServerApplication.main(null);
 
 
-        CommandBuilder.setClient(ServerApplication.getClient());
+        CommandBuilder.setClient(buildClient());
 
         WrappedWriter consoleOutputWriter = new WrappedWriter(new BufferedWriter(new PrintWriter(System.out)));
         CommandProvider commandProvider= new ConsoleCommandProvider(new Scanner(System.in),
@@ -28,6 +30,12 @@ public class TextClient {
             }
         }
 
+    }
+
+    private static Client buildClient() {
+        return Feign.builder()
+                .decoder(new GsonDecoder())
+                .target(Client.class, "http://localhost:8080");
     }
 
 }

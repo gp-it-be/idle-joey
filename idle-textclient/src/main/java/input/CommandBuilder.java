@@ -1,7 +1,7 @@
 package input;
 
+import client.Client;
 import commands.Command;
-import server.tempexported.Client;
 
 import java.util.Arrays;
 import java.util.Optional;

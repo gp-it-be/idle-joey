@@ -1,8 +1,9 @@
 package input;
 
 import commands.Command;
+import requestresponses.StartActivityRequest;
 import requestresponses.StartActivityResponse;
-import server.tempexported.Client;
+import client.Client;
 import state.TokenHolder;
 
 public class StartActivityCommand implements Command {
@@ -16,7 +17,7 @@ public class StartActivityCommand implements Command {
 
     @Override
     public void execute(WrappedWriter output) {
-        StartActivityResponse response = client.startActivity(TokenHolder.token, activityName);
+        StartActivityResponse response = client.startActivity(new StartActivityRequest(activityName), TokenHolder.token);
         output.write(response.toString());
 
     }
