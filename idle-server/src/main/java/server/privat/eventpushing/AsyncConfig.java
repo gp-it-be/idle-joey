@@ -16,9 +16,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.concurrent.Callable;
 
-@Configuration
-@EnableAsync
-@EnableScheduling
+//@Configuration
+//@EnableAsync
+//@EnableScheduling
 public class AsyncConfig implements AsyncConfigurer {
 
 

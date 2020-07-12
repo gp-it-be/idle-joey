@@ -14,7 +14,8 @@ import java.util.Scanner;
 public class TextClient {
 
     public static void main(String[] args) {
-        CommandBuilder.setClient(buildClient());
+        Client client = buildClient();
+        CommandBuilder.setClient(client);
 
         WrappedWriter consoleOutputWriter = new WrappedWriter(new BufferedWriter(new PrintWriter(System.out)));
         CommandProvider commandProvider= new ConsoleCommandProvider(new Scanner(System.in),

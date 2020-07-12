@@ -5,7 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import requirement.exported.ActivityController;
 import requirement.exported.ActivityService;
 import requirement.exported.PlayerInfoProvider;
@@ -15,7 +18,7 @@ import user.exported.UserService;
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 @EnableWebMvc
 @Configuration
-public class WebServerApplication {
+public class WebServerApplication implements WebMvcConfigurer {
 
 
     public static void main(String[] args) {
@@ -33,6 +36,20 @@ public class WebServerApplication {
     public ActivityController activityController() {
         PlayerInfoProvider playerInfoProvider = new EveryBodyNoob();
         return new ActivityController(new ActivityService(playerInfoProvider));
+    }
+
+
+    @Override
+    public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
+        configurer.setTaskExecutor(mvcTaskExecutor());
+        configurer.setDefaultTimeout(30_000);
+    }
+
+    @Bean
+    public ThreadPoolTaskExecutor mvcTaskExecutor() {
+        ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
+        taskExecutor.setThreadNamePrefix("mvc-task-");
+        return taskExecutor;
     }
 
 }
