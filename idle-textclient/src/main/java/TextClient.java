@@ -2,6 +2,7 @@ import client.Client;
 import executor.CommandProvider;
 import feign.Feign;
 import feign.gson.GsonDecoder;
+import feign.gson.GsonEncoder;
 import input.CommandBuilder;
 import input.ConsoleCommandProvider;
 import input.WrappedWriter;
@@ -13,9 +14,6 @@ import java.util.Scanner;
 public class TextClient {
 
     public static void main(String[] args) {
-        //ServerApplication.main(null);
-
-
         CommandBuilder.setClient(buildClient());
 
         WrappedWriter consoleOutputWriter = new WrappedWriter(new BufferedWriter(new PrintWriter(System.out)));
@@ -34,6 +32,7 @@ public class TextClient {
 
     private static Client buildClient() {
         return Feign.builder()
+                .encoder(new GsonEncoder())
                 .decoder(new GsonDecoder())
                 .target(Client.class, "http://localhost:8080");
     }
