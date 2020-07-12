@@ -22,5 +22,16 @@
             <artifactId>idle-server</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.joey</groupId>
+            <artifactId>idle-server-shared</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>idle-server</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>
