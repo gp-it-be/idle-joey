@@ -9,6 +9,6 @@ The real purpose of this repository:
 
 # Idle textclient
 
-Just a (temporary) means of playing with the server, without having to create a webapp that communicates over HTTP.
+Just a (temporary) means of playing with the server, without having to create a webapp with a rich UI
 
-Only direct access to the Controllers of the server is allowed
+Communicates via HTTP
