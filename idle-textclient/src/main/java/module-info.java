@@ -7,4 +7,5 @@ module idle.textclient {
     requires spring.web;
     requires spring.core;
     requires okhttp.eventsource;
+    requires okhttp3;
 }
