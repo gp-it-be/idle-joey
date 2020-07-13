@@ -5,5 +5,4 @@ module idle.server.shared {
     exports tomove.cqrs.commandstack;
     exports ticking;
     requires lombok;
-
 }
