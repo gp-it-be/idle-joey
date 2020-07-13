@@ -1,11 +1,9 @@
 package server.privat.eventpushing;
 
-import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
-
 import java.util.List;
 
 public interface ClientCommunications {
-    void registerEmitterTo(String token, SseEmitter emitter);
+    void registerEmitterTo(String token, ClientEventEmitter emitter);
 
-    List<SseEmitter> emittersFor(String username);
+    List<ClientEventEmitter> emittersFor(String username);
 }

@@ -1,7 +1,7 @@
 package server.privat;
 
-import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import server.privat.eventpushing.ClientCommunications;
+import server.privat.eventpushing.ClientEventEmitter;
 import user.exported.TokenToUsername;
 
 import java.util.*;
@@ -12,7 +12,7 @@ public class InMemorySessionManagement implements TokenToUsername, ConnectedUser
 
     private Map<String, String> tokenToUserNameSessions = new HashMap<>();
 
-    private Map<String, SseEmitter> emittersForToken = new HashMap<>();
+    private Map<String, ClientEventEmitter> emittersForToken = new HashMap<>();
 
 
     @Override
@@ -28,7 +28,7 @@ public class InMemorySessionManagement implements TokenToUsername, ConnectedUser
 
 
     @Override
-    public void registerEmitterTo(String token, SseEmitter emitter) {
+    public void registerEmitterTo(String token, ClientEventEmitter emitter) {
         if (!tokenToUserNameSessions.containsKey(token)) {
             throw new RuntimeException("Should register token session before registering eventemitter " + token);
         }
@@ -36,7 +36,7 @@ public class InMemorySessionManagement implements TokenToUsername, ConnectedUser
     }
 
     @Override
-    public List<SseEmitter> emittersFor(String username) {
+    public List<ClientEventEmitter> emittersFor(String username) {
         Set<String> tokensOfUsername = tokenToUserNameSessions
                 .entrySet()
                 .stream()

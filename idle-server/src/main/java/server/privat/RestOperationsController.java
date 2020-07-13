@@ -30,7 +30,7 @@ public class RestOperationsController {
         return userController.loginUser(request);
     }
 
-    @PostMapping("logout")
+    @GetMapping("logout")
     public LogoutResponse logout(@RequestHeader("token") String token){
         return userController.logoutClient(token);
     }

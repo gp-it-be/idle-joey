@@ -23,6 +23,6 @@ public class UserController {
     }
 
     public LogoutResponse logoutClient(String token) {
-        return userService.logoutCLient(token);
+        return userService.logoutClient(token);
     }
 }

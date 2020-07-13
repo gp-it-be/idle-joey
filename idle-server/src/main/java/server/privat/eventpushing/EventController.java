@@ -20,7 +20,7 @@ public class EventController {
     @GetMapping(value = "subscribetoevents", produces = "text/event-stream")
     public SseEmitter subscribeToEventsFor(@RequestHeader("token") String token) {
         SseEmitter emitter = new SseEmitter();
-        eventPushingService.registerEmitter(token, emitter);
+        eventPushingService.registerEmitter(token, SseClientEventEmitter.wrap(emitter));
         return emitter;
     }
 

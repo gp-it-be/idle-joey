@@ -1,14 +1,10 @@
 package server.privat.eventpushing;
 
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import server.privat.ConnectedUsernames;
-
-import java.util.concurrent.atomic.AtomicLong;
 
 public class EventPushingService {
 
-    private AtomicLong i = new AtomicLong();
 
     private ClientCommunications clientCommunications;
 
@@ -16,33 +12,27 @@ public class EventPushingService {
         this.clientCommunications = clientCommunications;
     }
 
-    @Scheduled(fixedDelay = 1000)
-    public void sendTest(){
+    @Scheduled(fixedDelay = 5000)
+    public void sendTest() {
         ((ConnectedUsernames) clientCommunications).getAllConnectedUsernames()
-                .forEach(name -> sendEventToClientsOf(name, "randomeventFor"+name));
+                .forEach(name -> sendEventToClientsOf(name, "randomeventFor" + name));
     }
 
     public void sendEventToClientsOf(String username, String event) {
 
-        SseEmitter.SseEventBuilder sseEvent = SseEmitter.event()
-                .data(event)
-                .id(String.valueOf(i.incrementAndGet()))
-                .name("?? wat hoort hier??");
 
         clientCommunications.emittersFor(username).forEach(
                 sseEmitter -> {
-                    try {
-                        System.out.println("sending event to "+username);
-                        sseEmitter.send(sseEvent);
-                    } catch (Exception e) {
-                        sseEmitter.completeWithError(e);
-                    }
+
+                    System.out.println("sending event to " + username);
+                    sseEmitter.sendData(event);
+
                 }
         );
     }
 
 
-    public void registerEmitter(String token, SseEmitter emitter) {
+    public void registerEmitter(String token, ClientEventEmitter emitter) {
         clientCommunications.registerEmitterTo(token, emitter);
     }
 }

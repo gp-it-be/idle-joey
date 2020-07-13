@@ -20,9 +20,9 @@ public class UserService {
     }
 
     public Optional<User> createUser(CreateUserRequest request) {
-        if(userRepo.findBy(request.getUsername()).isPresent()){
+        if (userRepo.findBy(request.getUsername()).isPresent()) {
             return Optional.empty();
-        }else{
+        } else {
             User user = userRepo.createUser(new User(request.getUsername(), PasswordHasher.hash(request.getPassWord())));
             return Optional.ofNullable(user);
         }
@@ -32,10 +32,11 @@ public class UserService {
         return userRepo.findBy(request.getUsername())
                 .map(foundUser -> foundUser.matchesPassword(request.getPassword()))
                 .map(success -> {
-                    if(success){
-                    String token = generateToken();
-                    tokenToUsername.sessionStarted(token, request.getUsername());
-                    return LoginResponse.getSuccess(token);}else{
+                    if (success) {
+                        String token = generateToken();
+                        tokenToUsername.sessionStarted(token, request.getUsername());
+                        return LoginResponse.getSuccess(token);
+                    } else {
                         return LoginResponse.incorrectPassword();
                     }
                 })
@@ -46,7 +47,7 @@ public class UserService {
         return new Random().nextInt() + "";
     }
 
-    public LogoutResponse logoutCLient(String token) {
+    public LogoutResponse logoutClient(String token) {
         tokenToUsername.sessionEnded(token);
         return LogoutResponse.success();
     }

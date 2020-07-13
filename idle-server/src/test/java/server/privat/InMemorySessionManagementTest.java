@@ -1,7 +1,7 @@
 package server.privat;
 
 import org.junit.Test;
-import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+import server.privat.eventpushing.ClientEventEmitter;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -47,8 +47,8 @@ public class InMemorySessionManagementTest {
         manager.sessionStarted("token1", "joske");
         manager.sessionStarted("token2", "joske");
 
-        manager.registerEmitterTo("token1", mock(SseEmitter.class));
-        manager.registerEmitterTo("token2", mock(SseEmitter.class));
+        manager.registerEmitterTo("token1", mock(ClientEventEmitter.class));
+        manager.registerEmitterTo("token2", mock(ClientEventEmitter.class));
 
         assertEquals(2, manager.emittersFor("joske").size());
     }
@@ -58,8 +58,8 @@ public class InMemorySessionManagementTest {
         manager.sessionStarted("token1", "joske");
         manager.sessionStarted("token2", "joske");
 
-        manager.registerEmitterTo("token1", mock(SseEmitter.class));
-        manager.registerEmitterTo("token2", mock(SseEmitter.class));
+        manager.registerEmitterTo("token1", mock(ClientEventEmitter.class));
+        manager.registerEmitterTo("token2", mock(ClientEventEmitter.class));
 
         manager.sessionEnded("token1");
         assertTrue(manager.getAllConnectedUsernames().contains("joske"));

@@ -7,6 +7,7 @@ import commands.Command;
 import okhttp3.Headers;
 import requestresponses.LoginRequest;
 import requestresponses.LoginResponse;
+import requestresponses.LogoutResponse;
 import state.TokenHolder;
 
 import java.net.URI;
