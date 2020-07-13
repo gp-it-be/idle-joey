@@ -1,18 +1,9 @@
 package input;
 
 import client.Client;
-import com.launchdarkly.eventsource.EventHandler;
-import com.launchdarkly.eventsource.EventSource;
 import commands.Command;
-import okhttp3.Headers;
-import requestresponses.LoginRequest;
-import requestresponses.LoginResponse;
 import requestresponses.LogoutResponse;
 import state.TokenHolder;
-
-import java.net.URI;
-import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 public class LogoutUserCommand implements Command {
     private Client client;
@@ -24,8 +15,10 @@ public class LogoutUserCommand implements Command {
     @Override
     public void execute(WrappedWriter output) {
         LogoutResponse response = client.logout(TokenHolder.token);
-        if(response.getSuccess()){
+        if (response.getSuccess()) {
+            IncomingEvents.stop();
             TokenHolder.clearToken();
+            output.write("logged out");
         }
     }
 }

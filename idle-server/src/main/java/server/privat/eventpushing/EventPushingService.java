@@ -15,20 +15,22 @@ public class EventPushingService {
     @Scheduled(fixedDelay = 5000)
     public void sendTest() {
         ((ConnectedUsernames) clientCommunications).getAllConnectedUsernames()
-                .forEach(name -> sendEventToClientsOf(name, "randomeventFor" + name));
+                .forEach(name -> sendToAllClientsOf(name, "randomeventFor" + name));
     }
 
-    public void sendEventToClientsOf(String username, String event) {
-
-
+    public void sendToAllClientsOf(String username, String event) {
         clientCommunications.emittersFor(username).forEach(
                 sseEmitter -> {
-
                     System.out.println("sending event to " + username);
                     sseEmitter.sendData(event);
-
                 }
         );
+    }
+
+    public void sendToSingleClient(String token, String event) {
+        System.out.println("sending event to " + token);
+        clientCommunications.singleEmitterFor(token)
+                .sendData(event);
     }
 
 

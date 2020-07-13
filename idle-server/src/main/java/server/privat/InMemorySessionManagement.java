@@ -50,6 +50,11 @@ public class InMemorySessionManagement implements TokenToUsername, ConnectedUser
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public ClientEventEmitter singleEmitterFor(String token) {
+        return emittersForToken.get(token);
+    }
+
 
     @Override
     public String getUsernameFor(String token) {

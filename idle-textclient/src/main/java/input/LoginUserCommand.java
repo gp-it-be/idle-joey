@@ -37,18 +37,8 @@ public class LoginUserCommand implements Command {
                     .reconnectTime(Duration.ofMillis(3000));
             builder.headers(Headers.of("token", response.getToken()));
 
-            new Thread(() -> {
-                try (EventSource eventSource = builder.build()) {
-                    eventSource.start();
-                    try {
-                        TimeUnit.HOURS.sleep(6);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
 
-                }
-
-            }).start();
+            IncomingEvents.start(builder);
 
             output.write(response.toString());
 
