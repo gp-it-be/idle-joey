@@ -4,6 +4,9 @@ import requestresponses.CreateUserRequest;
 import requestresponses.LoginRequest;
 import requestresponses.LoginResponse;
 import requestresponses.LogoutResponse;
+import ticking.JoeyClock;
+import tomove.cqrs.commandstack.CreatePlayerCommand;
+import tomove.cqrs.commandstack.PlayerAggregator;
 import user.PasswordHasher;
 
 import java.util.Optional;
@@ -12,11 +15,12 @@ import java.util.Random;
 public class UserService {
     private final TokenToUsername tokenToUsername;
     private UserRepo userRepo;
-
-    public UserService(UserRepo userRepo, TokenToUsername tokenToUsername) {
+private PlayerAggregator playerAggregator;
+    public UserService(UserRepo userRepo, TokenToUsername tokenToUsername, PlayerAggregator playerAggregator) {
 
         this.userRepo = userRepo;
         this.tokenToUsername = tokenToUsername;
+        this.playerAggregator = playerAggregator;
     }
 
     public Optional<User> createUser(CreateUserRequest request) {
@@ -24,6 +28,9 @@ public class UserService {
             return Optional.empty();
         } else {
             User user = userRepo.createUser(new User(request.getUsername(), PasswordHasher.hash(request.getPassWord())));
+            playerAggregator.handleCreateCommand(
+                    new CreatePlayerCommand(request.getUsername(), JoeyClock.currentTick())
+            );
             return Optional.ofNullable(user);
         }
     }

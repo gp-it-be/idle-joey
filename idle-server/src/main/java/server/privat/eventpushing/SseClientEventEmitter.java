@@ -31,4 +31,9 @@ public class SseClientEventEmitter implements ClientEventEmitter {
         }
 
     }
+
+    @Override
+    public void onConnectionBroke(Runnable r) {
+        sseEmitter.onCompletion(r);
+    }
 }

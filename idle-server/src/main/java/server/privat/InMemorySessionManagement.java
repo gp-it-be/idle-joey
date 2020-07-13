@@ -33,6 +33,11 @@ public class InMemorySessionManagement implements TokenToUsername, ConnectedUser
             throw new RuntimeException("Should register token session before registering eventemitter " + token);
         }
         emittersForToken.put(token, emitter);
+
+        emitter.onConnectionBroke(()->{
+            System.out.println("detected connection of client with token" +  token + "broke");
+            sessionEnded(token);
+        });
     }
 
     @Override

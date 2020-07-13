@@ -5,6 +5,7 @@ import org.junit.Test;
 import requestresponses.CreateUserRequest;
 import requestresponses.LoginRequest;
 import requestresponses.LoginResponse;
+import tomove.cqrs.commandstack.PlayerAggregator;
 import user.exported.User;
 import user.exported.UserRepo;
 import user.exported.UserService;
@@ -12,17 +13,20 @@ import user.exported.UserService;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 public class UserServiceTest {
 
     private UserRepo userRepo;
     private UserService userService;
+    private PlayerAggregator playerAggregatorMock;
 
     @Before
     public void setup() {
         userRepo = new UserRepoStub();
         TokenToUsernameStub sessionManagerStub = new TokenToUsernameStub();
-        userService = new UserService(userRepo, sessionManagerStub);
+        playerAggregatorMock = mock(PlayerAggregator.class);
+        userService = new UserService(userRepo, sessionManagerStub, playerAggregatorMock);
     }
 
     @Test
@@ -52,7 +56,7 @@ public class UserServiceTest {
 
 
     @Test
-    public void loginWithCorrectPassword(){
+    public void loginWithCorrectPassword() {
         String requestedName = "cowkilled37";
         String requestedPassword = "iluvcows";
         CreateUserRequest request = new CreateUserRequest(requestedName, requestedPassword);
@@ -66,9 +70,8 @@ public class UserServiceTest {
     }
 
 
-
     @Test
-    public void loginWithWrongPassword(){
+    public void loginWithWrongPassword() {
         String requestedName = "cowkilled37";
         String requestedPassword = "iluvcows";
         CreateUserRequest request = new CreateUserRequest(requestedName, requestedPassword);
@@ -81,7 +84,7 @@ public class UserServiceTest {
 
 
     @Test
-    public void loginNotExistingUser(){
+    public void loginNotExistingUser() {
         LoginResponse loginResponse = userService.loginUser(new LoginRequest("cowkilled37", "franky"));
         assertFalse(loginResponse.getSuccess());
     }

@@ -2,6 +2,7 @@ package server.privat;
 import org.springframework.web.bind.annotation.*;
 import requestresponses.*;
 import requirement.exported.ActivityController;
+import requirement.exported.PlayerInfo;
 import user.exported.UserController;
 
 @RestController()
@@ -41,5 +42,13 @@ public class RestOperationsController {
     public StartActivityResponse startActivity(@RequestHeader("token") String token, @RequestBody StartActivityRequest request){
         return activityController.startActivity(token, request);
     }
+
+
+    @GetMapping("currentstate")
+    public PlayerInfo getCurrentStateOfPlayer(@RequestHeader("token") String token){
+        throw new RuntimeException("WIP");
+        //return playerController.getCurrentStateOfPlayer(token);
+    }
+
 
 }

@@ -15,6 +15,9 @@ import requirement.exported.ActivityService;
 import requirement.exported.PlayerInfoProvider;
 import server.privat.eventpushing.ClientCommunications;
 import server.privat.eventpushing.EventPushingService;
+import server.privat.events.ClientUpdatingInMemoryEventStore;
+import server.privat.tomove.Ticker;
+import tomove.cqrs.commandstack.PlayerAggregator;
 import user.exported.UserController;
 import user.exported.UserService;
 
@@ -30,11 +33,9 @@ public class WebServerApplication implements WebMvcConfigurer {
     }
 
     @Bean
-    public UserController userController(InMemorySessionManagement sessions) {
-        return new UserController(new UserService(new InMemoryUserRepo(), sessions));
+    public UserController userController(InMemorySessionManagement sessions, PlayerAggregator playerAggregator) {
+        return new UserController(new UserService(new InMemoryUserRepo(), sessions, playerAggregator));
     }
-
-
 
 
     @Bean
@@ -68,4 +69,13 @@ public class WebServerApplication implements WebMvcConfigurer {
         return taskExecutor;
     }
 
+    @Bean
+    public PlayerAggregator playerAggregator(ClientCommunications clientCommunications) {
+        return new PlayerAggregator(new ClientUpdatingInMemoryEventStore(clientCommunications));
+    }
+
+    @Bean
+    public Ticker ticker(ConnectedUsernames connectedUsernames, PlayerAggregator playerAggregator){
+        return new Ticker(connectedUsernames, playerAggregator);
+    }
 }
