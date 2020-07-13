@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -14,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import requirement.exported.ActivityController;
 import requirement.exported.ActivityService;
 import requirement.exported.PlayerInfoProvider;
-import server.privat.eventpushing.ClientHolder;
+import server.privat.eventpushing.ClientCommunications;
 import server.privat.eventpushing.EventPushingService;
 import user.exported.UserController;
 import user.exported.UserService;
@@ -31,7 +30,7 @@ public class WebServerApplication implements WebMvcConfigurer {
     }
 
     @Bean
-    public UserController userController(InMemorySessionManager sessions) {
+    public UserController userController(InMemorySessionManagement sessions) {
         return new UserController(new UserService(new InMemoryUserRepo(), sessions));
     }
 
@@ -39,13 +38,13 @@ public class WebServerApplication implements WebMvcConfigurer {
 
 
     @Bean
-    public InMemorySessionManager sessionManager() {
-        return new InMemorySessionManager();
+    public InMemorySessionManagement sessionManager() {
+        return new InMemorySessionManagement();
     }
 
     @Bean
-    public EventPushingService eventPushingService(ClientHolder clientHolder) {
-        return new EventPushingService(clientHolder);
+    public EventPushingService eventPushingService(ClientCommunications clientCommunications) {
+        return new EventPushingService(clientCommunications);
     }
 
 

@@ -21,7 +21,7 @@ public class UserServiceTest {
     @Before
     public void setup() {
         userRepo = new UserRepoStub();
-        SessionManagerStub sessionManagerStub = new SessionManagerStub();
+        TokenToUsernameStub sessionManagerStub = new TokenToUsernameStub();
         userService = new UserService(userRepo, sessionManagerStub);
     }
 

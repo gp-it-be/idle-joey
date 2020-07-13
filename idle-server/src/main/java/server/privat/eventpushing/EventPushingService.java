@@ -2,7 +2,7 @@ package server.privat.eventpushing;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
-import server.privat.SessionRetriever;
+import server.privat.ConnectedUsernames;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -10,15 +10,15 @@ public class EventPushingService {
 
     private AtomicLong i = new AtomicLong();
 
-    private ClientHolder clientHolder;
+    private ClientCommunications clientCommunications;
 
-    public EventPushingService(ClientHolder clientHolder) {
-        this.clientHolder = clientHolder;
+    public EventPushingService(ClientCommunications clientCommunications) {
+        this.clientCommunications = clientCommunications;
     }
 
     @Scheduled(fixedDelay = 1000)
     public void sendTest(){
-        ((SessionRetriever)clientHolder).getAllConnectedUsernames()
+        ((ConnectedUsernames) clientCommunications).getAllConnectedUsernames()
                 .forEach(name -> sendEventToClientsOf(name, "randomeventFor"+name));
     }
 
@@ -29,7 +29,7 @@ public class EventPushingService {
                 .id(String.valueOf(i.incrementAndGet()))
                 .name("?? wat hoort hier??");
 
-        clientHolder.emittersFor(username).forEach(
+        clientCommunications.emittersFor(username).forEach(
                 sseEmitter -> {
                     try {
                         System.out.println("sending event to "+username);
@@ -43,6 +43,6 @@ public class EventPushingService {
 
 
     public void registerEmitter(String token, SseEmitter emitter) {
-        clientHolder.registerEmitterTo(token, emitter);
+        clientCommunications.registerEmitterTo(token, emitter);
     }
 }

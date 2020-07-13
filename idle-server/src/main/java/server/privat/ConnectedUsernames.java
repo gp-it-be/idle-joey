@@ -2,7 +2,7 @@ package server.privat;
 
 import java.util.Set;
 
-public interface SessionRetriever {
+public interface ConnectedUsernames {
 
 
     String getUsernameFor(String token);

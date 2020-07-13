@@ -27,4 +27,8 @@ public interface Client {
     @RequestLine("GET /subscribetoevents")
     @Headers({"token: {token}","Content-Type: application/json"})
     Flux<ServerSentEvent> subscribeToEvents(@Param("token") String token);
+
+    @RequestLine("GET /logout")
+    @Headers({"token: {token}","Content-Type: application/json"})
+    LogoutResponse logout(@Param("token")String token);
 }

@@ -30,6 +30,11 @@ public class RestOperationsController {
         return userController.loginUser(request);
     }
 
+    @PostMapping("logout")
+    public LogoutResponse logout(@RequestHeader("token") String token){
+        return userController.logoutClient(token);
+    }
+
 
 
     @PostMapping("startactivity")

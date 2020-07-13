@@ -3,19 +3,20 @@ package user.exported;
 import requestresponses.CreateUserRequest;
 import requestresponses.LoginRequest;
 import requestresponses.LoginResponse;
+import requestresponses.LogoutResponse;
 import user.PasswordHasher;
 
 import java.util.Optional;
 import java.util.Random;
 
 public class UserService {
-    private final SessionManager sessionManager;
+    private final TokenToUsername tokenToUsername;
     private UserRepo userRepo;
 
-    public UserService(UserRepo userRepo, SessionManager sessionManager) {
+    public UserService(UserRepo userRepo, TokenToUsername tokenToUsername) {
 
         this.userRepo = userRepo;
-        this.sessionManager = sessionManager;
+        this.tokenToUsername = tokenToUsername;
     }
 
     public Optional<User> createUser(CreateUserRequest request) {
@@ -33,7 +34,7 @@ public class UserService {
                 .map(success -> {
                     if(success){
                     String token = generateToken();
-                    sessionManager.sessionStarted(token, request.getUsername());
+                    tokenToUsername.sessionStarted(token, request.getUsername());
                     return LoginResponse.getSuccess(token);}else{
                         return LoginResponse.incorrectPassword();
                     }
@@ -43,5 +44,10 @@ public class UserService {
 
     private String generateToken() {
         return new Random().nextInt() + "";
+    }
+
+    public LogoutResponse logoutCLient(String token) {
+        tokenToUsername.sessionEnded(token);
+        return LogoutResponse.success();
     }
 }

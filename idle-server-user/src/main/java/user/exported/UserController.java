@@ -1,9 +1,6 @@
 package user.exported;
 
-import requestresponses.CreateUserRequest;
-import requestresponses.CreateUserResponse;
-import requestresponses.LoginRequest;
-import requestresponses.LoginResponse;
+import requestresponses.*;
 
 import java.util.Optional;
 
@@ -23,5 +20,9 @@ public class UserController {
 
     public LoginResponse loginUser(LoginRequest request) {
         return userService.loginUser(request);
+    }
+
+    public LogoutResponse logoutClient(String token) {
+        return userService.logoutCLient(token);
     }
 }

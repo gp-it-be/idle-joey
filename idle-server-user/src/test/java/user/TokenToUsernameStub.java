@@ -1,11 +1,11 @@
 package user;
 
-import user.exported.SessionManager;
+import user.exported.TokenToUsername;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class SessionManagerStub implements SessionManager {
+public class TokenToUsernameStub implements TokenToUsername {
 
 
     private Map<String, String> sessions = new HashMap<>();
@@ -13,6 +13,11 @@ public class SessionManagerStub implements SessionManager {
     @Override
     public void sessionStarted(String token, String username) {
         sessions.put(token, username);
+    }
+
+    @Override
+    public void sessionEnded(String token) {
+        sessions.remove(token);
     }
 
 }

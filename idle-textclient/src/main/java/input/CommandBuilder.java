@@ -37,6 +37,12 @@ public class CommandBuilder {
             return Optional.of(new LoginUserCommand(client, parameters[0], parameters[1]));
         }
 
+        if(commandName.equals("logout")){
+            verifyParamLength(parameters, 0);
+            return Optional.of(new LogoutUserCommand(client));
+        }
+
+
         if(commandName.equals("start")){
             verifyParamLength(parameters, 1);
             return Optional.of(new StartActivityCommand(client, parameters[0]));
